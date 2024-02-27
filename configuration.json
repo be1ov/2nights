@@ -1,0 +1,39 @@
+{
+    "id": "iouw234iowr23hio23ihopwehiopewrowery897789",
+    "title": "Библиотека",
+    "author": "be1ov",
+    "version": "1.0.0.0",
+    "resources": [
+        {
+            "id": "books",
+            "title": "Книги",
+            "fields": [
+                {
+                    "id": "title",
+                    "title": "Наименование",
+                    "type": "string",
+                    "length": 150,
+                    "required": true
+                },
+                {
+                    "id": "author",
+                    "title": "Автор",
+                    "type": "refto:authors"
+                }
+            ]
+        },
+        {
+            "id": "authors",
+            "title": "Авторы",
+            "fields": [
+                {
+                    "id": "title",
+                    "title": "ФИО",
+                    "type": "string",
+                    "length": 150,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}
