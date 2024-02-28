@@ -15,5 +15,3 @@ class ResourceModel:
         _fields = resource["fields"]
         for field in _fields:
             self.fields.append(FieldModel(field))
-        print(self.id, self.fields)
-        print(self.id, _fields)

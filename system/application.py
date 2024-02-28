@@ -1,3 +1,4 @@
+from system.models.web import Web
 from system.utils.config_parser import ConfigParser
 from system.models.database import Database
 
@@ -8,6 +9,7 @@ class Application:
     author: str
     version: str
     db: Database
+    web: Web
 
     def __init__(self, config_file: str):
         self.config_parser = ConfigParser(config_file)
@@ -28,3 +30,6 @@ class Application:
                     stmt += f", \"{field.id}\" {field.type} varying({field.length}) {'NOT NULL' if field.required else ''}"
             stmt += ")"
             self.db.query(stmt)
+
+        self.web = Web(config=self.config_parser)
+        self.web.setup_routes()

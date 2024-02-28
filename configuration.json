@@ -3,6 +3,14 @@
     "title": "Библиотека",
     "author": "be1ov",
     "version": "1.0.0.0",
+    "categories": [
+        {
+            "title": "Главное",
+            "content": [
+                "books", "authors"
+            ]
+        }
+    ],
     "resources": [
         {
             "id": "books",
@@ -31,6 +39,18 @@
                     "title": "ФИО",
                     "type": "string",
                     "length": 150,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "id": "exemplars",
+            "title": "Экземпляры",
+            "fields": [
+                {
+                    "id": "book",
+                    "title": "Книга",
+                    "type": "refto:books",
                     "required": true
                 }
             ]
