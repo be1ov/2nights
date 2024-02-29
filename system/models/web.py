@@ -15,6 +15,7 @@ class Web:
         self.application = application
 
         self.app.route("/", callback=self.main)
+        self.app.route("/resource/<resource_id>/<row_id>", callback=self.row)
         self.app.route("/resource/<resource_id>", callback=self.resource)
         print(f"Application started at port {self.port}!")
 
@@ -40,13 +41,23 @@ class Web:
 
         return data
 
-    def __generate_template_config__(self, resource_id=None):
+    def __current_row_data__(self, resource_id: int, row_id: int) -> dict:
+        result = self.application.db.query(f"SELECT * FROM {resource_id} WHERE id = {row_id}").fetchone()
+        return result
+
+    def __generate_template_config__(self, resource_id=None, row_id=None):
         current_resource = None
         if resource_id:
             current_resource = self.__current_resource_data__(resource_id)
+
+        current_row = None
+        if row_id:
+            current_row = self.__current_row_data__(resource_id, row_id)
+
         data = {
             "app_title": self.config.data.title,
             "current_resource": current_resource,
+            "current_row": current_row,
             "page_title": current_resource["title"] if current_resource else None,
             "resources": [
                 {
@@ -64,4 +75,8 @@ class Web:
 
     def resource(self, resource_id):
         tpl = bottle.template("main.tpl", self.__generate_template_config__(resource_id=resource_id))
+        return tpl
+
+    def row(self, resource_id, row_id):
+        tpl = bottle.template("main.tpl", self.__generate_template_config__(resource_id=resource_id, row_id=row_id))
         return tpl
