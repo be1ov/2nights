@@ -8,7 +8,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         % for resource in resources:
             <li class="nav-item">
-                <a class="nav-link {{"active" if resource_id == resource["id"] else ""}}" aria-current="page" href="/resource/{{resource["id"]}}">{{resource["title"]}}</a>
+                <a class="nav-link {{"active" if current_resource and current_resource["id"] == resource["id"] else ""}}" aria-current="page" href="/resource/{{resource["id"]}}">{{resource["title"]}}</a>
             </li>
         % end
       </ul>

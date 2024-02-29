@@ -1,33 +1,23 @@
-<h1>{{resource_title}}</h1>
-
 <div class="container-fluid">
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+% if current_resource:
+    <h1>{{current_resource["title"]}}</h1>
+      <table class="table">
+      <thead>
+        <tr>
+            % for column_name in current_resource["data"]["columns"]:
+                <th>{{column_name}}</th>
+            % end
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                % for row in current_resource["data"]["data"]:
+                    % for col in row:
+                        <th>{{col}}</th>
+                    % end
+                % end
+            </tr>
+        </tbody>
+    </table>
+% end
 </div>
